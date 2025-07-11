@@ -308,17 +308,17 @@ insert into thongTinCaNhan (IDCaNhan, ten, ho, gioiTinh, ngaySinh)
 insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
 	values (1, 'Jinx', 'female', 58, 1);
 insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
-	values (1, 'Jinx', 'female', 58, 2);
-insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
 	values (2, 'Jayce Talis', 'male', 59, 1);
-insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
-	values (2, 'Jayce Talis', 'male', 59, 2);
 insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
 	values (3, 'Viktor', 'male', 60, 1);
 insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
-	values (3, 'Viktor', 'male', 60, 2);
-insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
 	values (4, 'Caitlyn', 'female', 61, 1);
+insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
+	values (1, 'Jinx', 'female', 58, 2);
+insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
+	values (2, 'Jayce Talis', 'male', 59, 2);
+insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
+	values (3, 'Viktor', 'male', 60, 2);
 insert into nhanVat (IDNhanVat, tenNhanVat, gioiTinh, IDDienVien, IDFilm)
 	values (4, 'Caitlyn', 'female', 61, 2);
 
