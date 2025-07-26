@@ -34,17 +34,17 @@ from thongTinCaNhan ttcn
 where lower(f.tenFilm) like '%harry potter%';
 
 -- 6. Liệt kê tên phim, ngày phát hành và tên studio sản xuất phim đó.
--- RA: π_IDFilm,tenFilm,ngayPhatHanh,tenStudio(film ⨝ studio)
+-- RA: π_IDFilm,tenFilm,ngayPhatHanh,tenStudio(film * studio)
 select f.IDFilm, f.tenFilm, f.ngayPhatHanh, s.tenStudio
 from film f join studio s on f.studioID = s.studioID;
 
 -- 7. Liệt kê tất cả các nhân vật cùng với tên phim mà họ xuất hiện.
--- RA: π_tenNhanVat,tenFilm(nhanVat ⨝ film)
+-- RA: π_tenNhanVat,tenFilm(nhanVat * film)
 select nv.tenNhanVat, f.tenFilm
 from nhanVat nv join film f on nv.IDFilm = f.IDFilm;
 
 -- 8. Tìm các diễn viên đã đóng trong nhiều hơn 2 phim khác nhau.
--- RA: γ_IDCaNhan; count(distinct IDFilm) > 2(thongTinCaNhan ⨝ nhanVat ⨝ film)
+-- RA: (IDCaNhan) G (count(distinct IDFilm) > 2)(thongTinCaNhan ⨝ nhanVat ⨝ film)
 select ttcn.IDCaNhan, count(distinct f.IDFilm) as so_luong_phim_da_dong
 from thongTinCaNhan ttcn
     join nhanVat nv on ttcn.IDCaNhan = nv.IDDienVien
@@ -53,7 +53,7 @@ group by ttcn.IDCaNhan
 having count(distinct f.IDFilm) > 2;
 
 -- 9. Liệt kê tất cả các đạo diễn và số lượng phim mà họ đã đạo diễn.
--- RA: γ_IDCaNhan,ho,ten; count(IDFilm)(thongTinCaNhan ⨝ daoDien)
+-- RA: (IDCaNhan, ho, ten) G (count(IDFilm)) (thongTinCaNhan * daoDien)
 select ttcn.IDCaNhan, ttcn.ho || ' ' || ttcn.ten as ho_va_ten_dao_dien, count(dd.IDFilm) as so_luong_phim_dao_dien
 from thongTinCaNhan ttcn
     join daoDien dd on ttcn.IDCaNhan = dd.IDDaoDien
@@ -86,7 +86,7 @@ from thongTinCaNhan ttcn
 where lower(ttcn.gioiTinh) in ('f', 'female');
 
 -- 14. Liệt kê các phim thuộc thể loại 'Action'.
--- RA: π_IDFilm,tenFilm,theLoai(σ_theLoai LIKE '%action%'(Film))
+-- RA: π_IDFilm,tenFilm,theLoai(σ_theLoai = '%action%'(Film))
 select f.IDFilm, f.tenFilm, f.theLoai
 from film f
 where lower(f.theLoai) like '%action%';
@@ -98,7 +98,7 @@ from film f
 where f.thoiLuong > 120;
 
 -- 16. Thời lượng trung bình của các phim có rating >= 8, không tính tv series
--- RA: avg(thoiLuong)(σ_rating>=8 ∧ theLoai NOT LIKE '%tv series%'(Film))
+-- RA: avg(thoiLuong)(σ_rating>=8 ∧ theLoai <> '%tv series%'(Film))
 select round(avg(f.thoiLuong), 2) as thoi_luong_trung_binh
 from film f
 where f.rating >= 8
